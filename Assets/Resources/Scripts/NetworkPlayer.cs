@@ -8,8 +8,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class NetworkPlayer : MonoBehaviour
 {
-
     public Transform head;
+    public Transform body;
     public Transform leftHand;
     public Transform rightHand;
     private PhotonView photonView;
@@ -52,13 +52,15 @@ public class NetworkPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // don't show spawned game objects stuff it's yourself
+        // synchronize xr objects to clones
         if (photonView.IsMine)
         {
-            rightHand.gameObject.SetActive(false);
-            leftHand.gameObject.SetActive(false);
-            head.gameObject.SetActive(false);
+            // don't show spawned game objects stuff it's yourself
+            // rightHand.gameObject.SetActive(false);
+            // leftHand.gameObject.SetActive(false);
+            // head.gameObject.SetActive(false);
             MapPosition(head, XRNode.Head);
+            MapBody(body, XRNode.Head);
             MapPosition(leftHand, XRNode.LeftHand);
             MapPosition(rightHand, XRNode.RightHand);
         }
@@ -84,9 +86,6 @@ public class NetworkPlayer : MonoBehaviour
             var leftHandDistanceMoved = Mathf.Abs(positionPreviousLeftHand.y - positionCurrentLeftHand.y);
             var rightHandDistanceMoved = Mathf.Abs(positionPreviousRightHand.y - positionCurrentRightHand.y);
 
-            //Debug.Log("left:" + leftHandDistanceMoved);
-            //Debug.Log("right:" + rightHandDistanceMoved);
-
             // hand speed
             handSpeed = (leftHandDistanceMoved + rightHandDistanceMoved) / 2;
 
@@ -96,7 +95,6 @@ public class NetworkPlayer : MonoBehaviour
                 transform.position += moveAhead;
                 //Debug.Log(moveAhead);
                 xrRig.transform.position += moveAhead;
-
             }
 
             // set previous position for next frame
@@ -115,6 +113,14 @@ public class NetworkPlayer : MonoBehaviour
         target.position = position;
         target.rotation = rotation;
 
+    }
+
+    void MapBody(Transform target, XRNode node)
+    {
+        InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
+        target.position = position;
+
+        target.rotation = Quaternion.identity;
     }
 
 }
