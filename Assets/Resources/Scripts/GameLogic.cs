@@ -58,16 +58,22 @@ public class GameLogic : MonoBehaviour, IPunObservable
 
     public void StartGame(InputAction.CallbackContext ctx)
     {
-        startGame = true;
-        gameEnded = false;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            startGame = true;
+            gameEnded = false;
+        }
     }
 
 
     private void RestartPosition(InputAction.CallbackContext ctx)
     {
-        positionRestarted = true;
-        gameEnded = false;
-        startGame = false;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            positionRestarted = true;
+            gameEnded = false;
+            startGame = false;
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -86,7 +92,6 @@ public class GameLogic : MonoBehaviour, IPunObservable
                 stream.SendNext(positionRestarted);
             }
         }
-
 
         // everyone can win the game
         if (stream.IsReading)
