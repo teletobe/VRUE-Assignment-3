@@ -25,6 +25,11 @@ public class NetworkPlayer : MonoBehaviour
     private Vector3 positionCurrentRightHand;
 
     private XROrigin xrRig;
+    private GameObject xrOrigin;
+    private GameObject xrCamera;
+    private GameObject xrLeftHand;
+    private GameObject xrRightHand;
+
 
     // speed
     public float speed;
@@ -46,6 +51,11 @@ public class NetworkPlayer : MonoBehaviour
         {
             Debug.LogError("XR Rig not found. Make sure it is present in the scene.");
         }
+        xrOrigin = GameObject.Find("XR Origin");
+        xrCamera = GameObject.Find("XR Origin/Camera Offset/Main Camera");
+        xrLeftHand = GameObject.Find("XR Origin/Camera Offset/Left Controller");
+        xrRightHand = GameObject.Find("XR Origin/Camera Offset/Right Controller");
+        Debug.Log(xrOrigin + "," + xrCamera + ", " + xrLeftHand + ", " + xrRightHand);
 
     }
 
@@ -78,7 +88,7 @@ public class NetworkPlayer : MonoBehaviour
             if (Time.timeSinceLevelLoad > 1f)
             {
                 Vector3 moveAhead = forwardDirection.transform.forward * handSpeed * speed * Time.deltaTime;
-                transform.position += moveAhead;
+                //transform.position += moveAhead;
                 //Debug.Log(moveAhead);
                 xrRig.transform.position += moveAhead;
             }
@@ -96,13 +106,21 @@ public class NetworkPlayer : MonoBehaviour
             // rightHand.gameObject.SetActive(false);
             // leftHand.gameObject.SetActive(false);
             // head.gameObject.SetActive(false);
-            MapPosition(head, XRNode.Head);
-            MapBody(body, XRNode.Head);
-            MapPosition(leftHand, XRNode.LeftHand);
-            MapPosition(rightHand, XRNode.RightHand);
+
+            MapXRPosition(head, xrCamera);
+            MapXRPosition(body, xrCamera);
+            MapXRPosition(leftHand, xrLeftHand);
+            MapXRPosition(rightHand, xrRightHand);
+            
         }
 
 
+    }
+
+    void MapXRPosition(Transform target, GameObject gameObject)
+    {
+        target.position = gameObject.transform.position;
+        target.rotation = gameObject.transform.rotation;
     }
 
     void MapPosition(Transform target, XRNode node)
@@ -112,7 +130,6 @@ public class NetworkPlayer : MonoBehaviour
 
         target.position = position;
         target.rotation = rotation;
-
     }
 
     void MapBody(Transform target, XRNode node)
