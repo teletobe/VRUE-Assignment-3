@@ -52,20 +52,6 @@ public class NetworkPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // synchronize xr objects to clones
-        if (photonView.IsMine)
-        {
-            // don't show spawned game objects stuff it's yourself
-            // rightHand.gameObject.SetActive(false);
-            // leftHand.gameObject.SetActive(false);
-            // head.gameObject.SetActive(false);
-            MapPosition(head, XRNode.Head);
-            MapBody(body, XRNode.Head);
-            MapPosition(leftHand, XRNode.LeftHand);
-            MapPosition(rightHand, XRNode.RightHand);
-        }
-
-
         // movement stuff
         if (photonView.IsMine)
         {
@@ -102,6 +88,20 @@ public class NetworkPlayer : MonoBehaviour
             positionPreviousRightHand = positionCurrentRightHand;
             positionPreviousPlayer = positionCurrentPlayer;
         }
+
+        // synchronize xr objects to clones
+        if (photonView.IsMine)
+        {
+            // don't show spawned game objects stuff it's yourself
+            // rightHand.gameObject.SetActive(false);
+            // leftHand.gameObject.SetActive(false);
+            // head.gameObject.SetActive(false);
+            MapPosition(head, XRNode.Head);
+            MapBody(body, XRNode.Head);
+            MapPosition(leftHand, XRNode.LeftHand);
+            MapPosition(rightHand, XRNode.RightHand);
+        }
+
 
     }
 

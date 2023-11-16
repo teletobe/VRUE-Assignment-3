@@ -12,6 +12,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         spawnedPlayerPrefab = PhotonNetwork.Instantiate("Prefabs/Network Player", transform.position, transform.rotation);
+        Debug.Log(transform.position);
 
         // track
         Vector3 distance = new Vector3(PhotonNetwork.PlayerList.Length * 10, 0, 0);
