@@ -8,97 +8,32 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class NetworkPlayer : MonoBehaviour
 {
+    // clone
     public Transform head;
     public Transform body;
     public Transform leftHand;
     public Transform rightHand;
     private PhotonView photonView;
     
-    // for locomotion
-    public Transform forwardDirection;
-    // positions prev and current
-    private Vector3 positionPreviousPlayer;
-    private Vector3 positionPreviousLeftHand;
-    private Vector3 positionPreviousRightHand;
-    private Vector3 positionCurrentPlayer;
-    private Vector3 positionCurrentLeftHand;
-    private Vector3 positionCurrentRightHand;
-
-    private XROrigin xrRig;
-    private GameObject xrOrigin;
+    // original xr gameobjct
     private GameObject xrCamera;
     private GameObject xrLeftHand;
     private GameObject xrRightHand;
-
-
-    // speed
-    public float speed;
-    private float handSpeed = 1;
-
 
     // Start is called before the first frame update
     void Start()
     {
         photonView = GetComponent<PhotonView>();
 
-        //set previous positions
-        positionPreviousPlayer = head.transform.position;
-        positionPreviousLeftHand = leftHand.transform.position;
-        positionPreviousRightHand = rightHand.transform.position;
-
-        xrRig = FindObjectOfType<XROrigin>();
-        if (xrRig == null)
-        {
-            Debug.LogError("XR Rig not found. Make sure it is present in the scene.");
-        }
-        xrOrigin = GameObject.Find("XR Origin");
+        // get xr game objects
         xrCamera = GameObject.Find("XR Origin/Camera Offset/Main Camera");
         xrLeftHand = GameObject.Find("XR Origin/Camera Offset/Left Controller");
         xrRightHand = GameObject.Find("XR Origin/Camera Offset/Right Controller");
-        Debug.Log(xrOrigin + "," + xrCamera + ", " + xrLeftHand + ", " + xrRightHand);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        // movement stuff
-        if (photonView.IsMine)
-        {
-            // get forward direction
-            // currently from camera
-            float yRotation = head.transform.eulerAngles.y;
-            forwardDirection.transform.eulerAngles = new Vector3(0, yRotation, 0);
-
-            // get positons of hands
-            positionCurrentLeftHand = leftHand.transform.position;
-            positionCurrentRightHand = rightHand.transform.position;
-
-            // position of player
-            positionCurrentPlayer = head.transform.position;
-
-            // get distance the hands and player has moved from last frame
-            // only movement in y direction
-            var leftHandDistanceMoved = Mathf.Abs(positionPreviousLeftHand.y - positionCurrentLeftHand.y);
-            var rightHandDistanceMoved = Mathf.Abs(positionPreviousRightHand.y - positionCurrentRightHand.y);
-
-            // hand speed
-            handSpeed = (leftHandDistanceMoved + rightHandDistanceMoved) / 2;
-
-            if (Time.timeSinceLevelLoad > 1f)
-            {
-                Vector3 moveAhead = forwardDirection.transform.forward * handSpeed * speed * Time.deltaTime;
-                //transform.position += moveAhead;
-                //Debug.Log(moveAhead);
-                xrRig.transform.position += moveAhead;
-            }
-
-            // set previous position for next frame
-            positionPreviousLeftHand = positionCurrentLeftHand;
-            positionPreviousRightHand = positionCurrentRightHand;
-            positionPreviousPlayer = positionCurrentPlayer;
-        }
-
         // synchronize xr objects to clones
         if (photonView.IsMine)
         {
@@ -110,34 +45,22 @@ public class NetworkPlayer : MonoBehaviour
             MapXRPosition(head, xrCamera);
             MapXRPosition(body, xrCamera);
             MapXRPosition(leftHand, xrLeftHand);
-            MapXRPosition(rightHand, xrRightHand);
-            
+            MapXRPosition(rightHand, xrRightHand);   
         }
-
-
     }
 
     void MapXRPosition(Transform target, GameObject gameObject)
     {
         target.position = gameObject.transform.position;
-        target.rotation = gameObject.transform.rotation;
-    }
 
-    void MapPosition(Transform target, XRNode node)
-    {
-        InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
-        InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation);
-
-        target.position = position;
-        target.rotation = rotation;
-    }
-
-    void MapBody(Transform target, XRNode node)
-    {
-        InputDevices.GetDeviceAtXRNode(node).TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
-        target.position = position;
-
-        target.rotation = Quaternion.identity;
+        if (target != body)
+        {
+            target.rotation = gameObject.transform.rotation;
+        }
+        else
+        {
+            target.rotation = Quaternion.identity;
+        }
     }
 
 }

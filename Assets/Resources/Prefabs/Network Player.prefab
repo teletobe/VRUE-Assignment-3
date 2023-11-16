@@ -387,8 +387,6 @@ MonoBehaviour:
   body: {fileID: 6454947494645752192}
   leftHand: {fileID: 7063144677609186270}
   rightHand: {fileID: 3074420046716760912}
-  forwardDirection: {fileID: 1763610583414527502}
-  speed: 100
 --- !u!1 &9199771784293903785
 GameObject:
   m_ObjectHideFlags: 0
