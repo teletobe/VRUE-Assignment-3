@@ -236,6 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6454947494645752192}
+  - component: {fileID: 420785988766634803}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -259,6 +260,22 @@ Transform:
   m_Father: {fileID: 4608317341680833070}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &420785988766634803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7711941635991749473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &7899618075558715963
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +336,7 @@ GameObject:
   - component: {fileID: 4608317341680833070}
   - component: {fileID: 4283218040125478297}
   - component: {fileID: 2716363182786464323}
+  - component: {fileID: 278696029440852799}
   m_Layer: 0
   m_Name: Network Player
   m_TagString: Untagged
@@ -365,7 +383,9 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 278696029440852799}
   - {fileID: 7201902763189170475}
+  - {fileID: 420785988766634803}
   - {fileID: 979719777543572449}
   - {fileID: 1587556319419911116}
   sceneViewId: 0
@@ -387,6 +407,27 @@ MonoBehaviour:
   body: {fileID: 6454947494645752192}
   leftHand: {fileID: 7063144677609186270}
   rightHand: {fileID: 3074420046716760912}
+--- !u!114 &278696029440852799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280348768580596657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f553556d44ede0648bde08a5ee882c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startGame: 0
+  gameEnded: 0
+  positionRestarted: 0
+  restartReference: {fileID: -3280383718153123070, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  startReference: {fileID: 845526307838459384, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  finishPlate: {fileID: 0}
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &9199771784293903785
 GameObject:
   m_ObjectHideFlags: 0

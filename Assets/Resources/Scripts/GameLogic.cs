@@ -14,12 +14,13 @@ public class GameLogic : MonoBehaviour, IPunObservable
     public InputActionReference restartReference = null;
     public InputActionReference startReference = null;
 
-    public GameObject xrOrigin;
-    public GameObject xrCamera;
+    private GameObject xrOrigin;
+    private GameObject xrCamera;
 
     public GameObject finishPlate = null; // will be assigned when player is spawned
 
-    public Vector3 startPosition; 
+    public Vector3 startPosition;
+    private PhotonView photonView;
 
     private void Awake()
     {
@@ -30,7 +31,10 @@ public class GameLogic : MonoBehaviour, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
 
+        xrOrigin = GameObject.Find("XR Origin");
+        xrCamera = GameObject.Find("XR Origin/Camera Offset/Main Camera");
     }
 
     // Update is called once per frame
@@ -42,7 +46,8 @@ public class GameLogic : MonoBehaviour, IPunObservable
         }
 
         // rough estimate does not quite work yet
-        if (xrOrigin.transform.position.z >= finishPlate.transform.position.z)
+        // maybe use finishplate?
+        if (xrOrigin.transform.position.z >= 30)
         {
             gameEnded = true;
         }

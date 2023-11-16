@@ -13,7 +13,6 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
     public void Start()
     {
-        gameLogic = xrOrigin.GetComponent<GameLogic>();
     }
     public override void OnJoinedRoom()
     {
@@ -24,8 +23,9 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         spawnedTrackPrefab = PhotonNetwork.Instantiate("Prefabs/Track", distance, Quaternion.identity);
 
         // player
-        gameLogic.startPosition = distance;
         spawnedPlayerPrefab = PhotonNetwork.Instantiate("Prefabs/Network Player", distance, Quaternion.identity);
+        gameLogic = spawnedPlayerPrefab.GetComponent<GameLogic>();
+        gameLogic.startPosition = distance;
         Debug.Log(transform.position);
 
         gameLogic.finishPlate = GameObject.FindGameObjectsWithTag("Finish")[0];
