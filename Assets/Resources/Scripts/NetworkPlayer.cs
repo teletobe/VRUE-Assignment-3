@@ -14,7 +14,7 @@ public class NetworkPlayer : MonoBehaviour
     public Transform leftHand;
     public Transform rightHand;
     private PhotonView photonView;
-    
+
     // original xr gameobjct
     private GameObject xrCamera;
     private GameObject xrLeftHand;
@@ -29,6 +29,7 @@ public class NetworkPlayer : MonoBehaviour
         xrCamera = GameObject.Find("XR Origin/Camera Offset/Main Camera");
         xrLeftHand = GameObject.Find("XR Origin/Camera Offset/Left Controller");
         xrRightHand = GameObject.Find("XR Origin/Camera Offset/Right Controller");
+
     }
 
     // Update is called once per frame
@@ -62,5 +63,7 @@ public class NetworkPlayer : MonoBehaviour
             target.rotation = Quaternion.identity;
         }
     }
+
+
 
 }
