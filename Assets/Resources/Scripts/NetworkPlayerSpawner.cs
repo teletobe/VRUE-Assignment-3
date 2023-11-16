@@ -11,12 +11,14 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        spawnedPlayerPrefab = PhotonNetwork.Instantiate("Prefabs/Network Player", transform.position, transform.rotation);
-        Debug.Log(transform.position);
 
         // track
-        Vector3 distance = new Vector3(PhotonNetwork.PlayerList.Length * 10, 0, 0);
+        Vector3 distance = new Vector3((PhotonNetwork.PlayerList.Length - 1) * 10, 0, 0);
         spawnedTrackPrefab = PhotonNetwork.Instantiate("Prefabs/Track", distance, Quaternion.identity);
+
+        // player
+        spawnedPlayerPrefab = PhotonNetwork.Instantiate("Prefabs/Network Player", distance, Quaternion.identity);
+        Debug.Log(transform.position);
 
     }
 

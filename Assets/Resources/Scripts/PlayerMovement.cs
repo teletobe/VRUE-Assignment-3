@@ -79,4 +79,7 @@ public class PlayerMovement : MonoBehaviour
         positionPreviousPlayer = positionCurrentPlayer;
        
     }
+
 }
+
+
