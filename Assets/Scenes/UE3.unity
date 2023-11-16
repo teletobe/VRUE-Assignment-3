@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardDirection: {fileID: 1167441642}
-  speed: 200
+  speed: 800
   xrOrigin: {fileID: 131329519}
   xrCamera: {fileID: 1494631615}
   xrLeftHand: {fileID: 648693329}
@@ -639,6 +639,9 @@ MonoBehaviour:
   startReference: {fileID: 845526307838459384, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   xrOrigin: {fileID: 131329519}
+  xrCamera: {fileID: 1494631615}
+  finishPlate: {fileID: 0}
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &147807575
 GameObject:
   m_ObjectHideFlags: 0
@@ -6173,6 +6176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de165e8e7aceea4fa9be4bdc41ffe9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xrOrigin: {fileID: 131329519}
 --- !u!1 &1076718168
 GameObject:
   m_ObjectHideFlags: 0

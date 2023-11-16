@@ -17,6 +17,8 @@ public class GameLogic : MonoBehaviour, IPunObservable
     public GameObject xrOrigin;
     public GameObject xrCamera;
 
+    public GameObject finishPlate = null; // will be assigned when player is spawned
+
     public Vector3 startPosition; 
 
     private void Awake()
@@ -40,7 +42,7 @@ public class GameLogic : MonoBehaviour, IPunObservable
         }
 
         // rough estimate does not quite work yet
-        if (xrCamera.transform.position.z >= 20)
+        if (xrOrigin.transform.position.z >= finishPlate.transform.position.z)
         {
             gameEnded = true;
         }

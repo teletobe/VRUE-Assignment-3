@@ -28,6 +28,8 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         spawnedPlayerPrefab = PhotonNetwork.Instantiate("Prefabs/Network Player", distance, Quaternion.identity);
         Debug.Log(transform.position);
 
+        gameLogic.finishPlate = GameObject.FindGameObjectsWithTag("Finish")[0];
+
     }
 
     public override void OnLeftRoom()
