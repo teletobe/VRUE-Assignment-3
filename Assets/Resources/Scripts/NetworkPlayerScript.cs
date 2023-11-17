@@ -7,7 +7,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
 
-public class NetworkPlayer : MonoBehaviourPun, IPunObservable
+public class NetworkPlayerScript : MonoBehaviour, IPunObservable
 {
     // clone
     public Transform head;

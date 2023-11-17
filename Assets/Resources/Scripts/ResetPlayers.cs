@@ -31,10 +31,10 @@ public class ResetPlayers : MonoBehaviour
         List<bool> bools = new List<bool>();
         foreach (GameObject player in gos)
         {
-            bools.Add(player.GetComponent<NetworkPlayer>().isReady);
-            if (player.GetComponent<NetworkPlayer>().isLocal)
+            bools.Add(player.GetComponent<NetworkPlayerScript>().isReady);
+            if (player.GetComponent<NetworkPlayerScript>().isLocal)
             {
-                localStartPos = player.GetComponent<NetworkPlayer>().startPosition;
+                localStartPos = player.GetComponent<NetworkPlayerScript>().startPosition;
             }
         }
 
@@ -43,7 +43,7 @@ public class ResetPlayers : MonoBehaviour
             resetGame = true;
             foreach (GameObject player in gos)
             {
-                player.GetComponent<NetworkPlayer>().isReady = false;
+                player.GetComponent<NetworkPlayerScript>().isReady = false;
             }
         }
 
