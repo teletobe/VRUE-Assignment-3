@@ -406,6 +406,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ce0aefd7032154facfd00e4ff50f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  head: {fileID: 7822196140822406475}
+  body: {fileID: 6454947494645752192}
+  leftHand: {fileID: 7063144677609186270}
+  rightHand: {fileID: 3074420046716760912}
+  startPosition: {x: 0, y: 0, z: 0}
+  isLocal: 0
+  isReady: 0
+  startReference: {fileID: 845526307838459384, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!114 &3368286456811358947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,8 +430,10 @@ MonoBehaviour:
   startGame: 0
   gameEnded: 0
   positionRestarted: 0
-  restartReference: {fileID: 0}
-  startReference: {fileID: 0}
+  restartReference: {fileID: -3280383718153123070, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  startReference: {fileID: 845526307838459384, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
   finishPlate: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &3971785583371826415
