@@ -22,6 +22,7 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         Vector3 distance = new Vector3((PhotonNetwork.PlayerList.Length -1) * 10, 0, 0);
         spawnedTrackPrefab = PhotonNetwork.Instantiate("Prefabs/Track", distance, Quaternion.identity);
 
+        xrOrigin.transform.position = distance;
         // player
         spawnedPlayerPrefab = PhotonNetwork.Instantiate("Prefabs/Network Player", distance, Quaternion.identity);
         //gameLogic = spawnedPlayerPrefab.GetComponent<GameLogic>();

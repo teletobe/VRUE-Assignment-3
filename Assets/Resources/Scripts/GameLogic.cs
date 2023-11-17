@@ -37,7 +37,7 @@ public class GameLogic : MonoBehaviour, IPunObservable
         xrCamera = GameObject.Find("XR Origin/Camera Offset/Main Camera");
     }
 
-    // Update is called once per frame
+    // Update is called once per frameahja
     void Update()
     {
         if (gameEnded || positionRestarted)

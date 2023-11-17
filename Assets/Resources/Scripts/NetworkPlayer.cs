@@ -7,7 +7,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
 
-public class NetworkPlayer : MonoBehaviour
+public class NetworkPlayer : MonoBehaviourPun, IPunObservable
 {
     // clone
     public Transform head;
@@ -32,7 +32,7 @@ public class NetworkPlayer : MonoBehaviour
 
     private void Awake()
     {
-        startReference.action.started += StartGame;
+       // startReference.action.started += StartGame;
     }
 
 
@@ -46,7 +46,14 @@ public class NetworkPlayer : MonoBehaviour
         xrLeftHand = GameObject.Find("XR Origin/Camera Offset/Left Controller");
         xrRightHand = GameObject.Find("XR Origin/Camera Offset/Right Controller");
         isReady = false;
-        startPosition = xrCamera.transform.position;
+        if (photonView.IsMine)
+        {
+            startPosition = xrCamera.transform.position;
+        }
+        else
+        {
+            startPosition = transform.position;
+        }
 
     }
 
@@ -84,11 +91,26 @@ public class NetworkPlayer : MonoBehaviour
         }
     }
 
+    /*
     public void StartGame(InputAction.CallbackContext ctx)
     {
-        isReady = true;
-    }
+        if (photonView.IsMine)
+        {
+            isReady = true;
+        }
+    }*/
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsReading)
+        {
+            isReady = (bool)stream.ReceiveNext();
+        }
+        else if (stream.IsWriting)
+        {
+            stream.SendNext(isReady);
+        }
+    }
 
 
 }
