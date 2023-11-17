@@ -549,7 +549,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131329519}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0bf296fc962d7184ab14ad1841598d5f, type: 3}
   m_Name: 
@@ -614,11 +614,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardDirection: {fileID: 1167441642}
-  speed: 800
+  speed: 100
   xrOrigin: {fileID: 131329519}
   xrCamera: {fileID: 1494631615}
   xrLeftHand: {fileID: 648693329}
   xrRightHand: {fileID: 265516653}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  bounceForce: 1
 --- !u!114 &131329527
 MonoBehaviour:
   m_ObjectHideFlags: 0
