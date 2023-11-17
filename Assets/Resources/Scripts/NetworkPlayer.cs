@@ -5,6 +5,7 @@ using UnityEngine.XR;
 using Photon.Pun;
 using Unity.XR.CoreUtils;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
 
 public class NetworkPlayer : MonoBehaviour
 {
@@ -20,6 +21,21 @@ public class NetworkPlayer : MonoBehaviour
     private GameObject xrLeftHand;
     private GameObject xrRightHand;
 
+
+    public Vector3 startPosition;
+    public bool isLocal;
+    public bool isReady;
+
+    public InputActionReference startReference = null;
+
+
+
+    private void Awake()
+    {
+        startReference.action.started += StartGame;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +45,8 @@ public class NetworkPlayer : MonoBehaviour
         xrCamera = GameObject.Find("XR Origin/Camera Offset/Main Camera");
         xrLeftHand = GameObject.Find("XR Origin/Camera Offset/Left Controller");
         xrRightHand = GameObject.Find("XR Origin/Camera Offset/Right Controller");
+        isReady = false;
+        startPosition = xrCamera.transform.position;
 
     }
 
@@ -42,6 +60,8 @@ public class NetworkPlayer : MonoBehaviour
             // rightHand.gameObject.SetActive(false);
             // leftHand.gameObject.SetActive(false);
             // head.gameObject.SetActive(false);
+
+            isLocal = true;
 
             MapXRPosition(head, xrCamera);
             MapXRPosition(body, xrCamera);
@@ -62,6 +82,11 @@ public class NetworkPlayer : MonoBehaviour
         {
             target.rotation = Quaternion.identity;
         }
+    }
+
+    public void StartGame(InputAction.CallbackContext ctx)
+    {
+        isReady = true;
     }
 
 

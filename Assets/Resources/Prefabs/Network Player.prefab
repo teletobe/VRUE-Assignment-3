@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 2716363182786464323}
   m_Layer: 0
   m_Name: Network Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,6 +359,7 @@ Transform:
   - {fileID: 7063144677609186270}
   - {fileID: 3074420046716760912}
   - {fileID: 1763610583414527502}
+  - {fileID: 2381809314239153615}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -404,6 +405,42 @@ MonoBehaviour:
   body: {fileID: 6454947494645752192}
   leftHand: {fileID: 7063144677609186270}
   rightHand: {fileID: 3074420046716760912}
+  startPosition: {x: 0, y: 0, z: 0}
+  isLocal: 0
+  isReady: 0
+  startReference: {fileID: 845526307838459384, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+--- !u!1 &8428039311497602127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2381809314239153615}
+  m_Layer: 0
+  m_Name: GameLogicPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2381809314239153615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8428039311497602127}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5499351, y: -0.5115432, z: 0.6220479}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4608317341680833070}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9199771784293903785
 GameObject:
   m_ObjectHideFlags: 0

@@ -88,8 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
         // hand speed
         handSpeed = (leftHandDistanceMoved + rightHandDistanceMoved) * 1000;
-        Debug.Log("hand:" + handSpeed);
-        if (Time.timeSinceLevelLoad > 0.01f && leftHandDistanceMoved > 0.025 && rightHandDistanceMoved > 0.025 )
+        if (Time.timeSinceLevelLoad > 1f && leftHandDistanceMoved > 0.025 && rightHandDistanceMoved > 0.025 )
         {
             Vector3 moveAhead = forwardDirection.transform.forward * handSpeed / 1000 * speed * Time.deltaTime;
             Vector3 targetPosition = xrOrigin.transform.position + moveAhead;
