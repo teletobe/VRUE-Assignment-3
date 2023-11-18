@@ -8,11 +8,8 @@ using Photon.Pun;
 
 public class ResetPlayers : MonoBehaviour
 {
-
-    public bool resetGame;
     public Vector3 localStartPos;
     public GameObject xrOrigin;
-
 
     // Start is called before the first frame update
     void Start()
@@ -23,33 +20,31 @@ public class ResetPlayers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // find all players
+        GameObject[] playerGameObjects;
+        playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
 
-        GameObject[] gos;
-        gos = GameObject.FindGameObjectsWithTag("Player");
-        //check all network players if all are true
-        //then resetGame = true;
+        //check all network players if isReady is true
         List<bool> bools = new List<bool>();
-        foreach (GameObject player in gos)
+        foreach (GameObject player in playerGameObjects)
         {
             bools.Add(player.GetComponent<NetworkPlayerScript>().isReady);
+
+            // get start position
             if (player.GetComponent<NetworkPlayerScript>().isLocal)
             {
                 localStartPos = player.GetComponent<NetworkPlayerScript>().startPosition;
             }
         }
 
+        // if all players isReady then reset position
         if (!bools.Contains(false)){
             resetXRrig();
-            resetGame = true;
-            foreach (GameObject player in gos)
+            foreach (GameObject player in playerGameObjects)
             {
                 player.GetComponent<NetworkPlayerScript>().isReady = false;
             }
         }
-
-       
-        resetGame = false;
-        // reset all network players isReady bool to false
     }
 
     private void resetXRrig()

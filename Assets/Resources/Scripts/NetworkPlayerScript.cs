@@ -44,7 +44,8 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         xrLeftHand = GameObject.Find("XR Origin/Camera Offset/Left Controller");
         xrRightHand = GameObject.Find("XR Origin/Camera Offset/Right Controller");
         isReady = false;
-        startPosition = transform.position;
+
+        startPosition = transform.position; // should work like this
         /*
         if (photonView.IsMine)
         {
@@ -94,12 +95,10 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     
     public void StartGame(InputAction.CallbackContext ctx)
     {
-
-        /*
         if (photonView.IsMine)
         {
             isReady = true;
-        }*/
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

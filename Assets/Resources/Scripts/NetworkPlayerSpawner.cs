@@ -25,8 +25,6 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
         xrOrigin.transform.position = distance;
         // player
         spawnedPlayerPrefab = PhotonNetwork.Instantiate("Prefabs/Network Player", distance, Quaternion.identity);
-        //gameLogic = spawnedPlayerPrefab.GetComponent<GameLogic>();
-        //gameLogic.startPosition = distance;
 
     }
 
