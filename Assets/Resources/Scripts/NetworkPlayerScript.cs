@@ -44,6 +44,8 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         xrLeftHand = GameObject.Find("XR Origin/Camera Offset/Left Controller");
         xrRightHand = GameObject.Find("XR Origin/Camera Offset/Right Controller");
         isReady = false;
+        startPosition = xrCamera.transform.position;
+        /*
         if (photonView.IsMine)
         {
             startPosition = xrCamera.transform.position;
@@ -51,7 +53,7 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         else
         {
             startPosition = transform.position;
-        }
+        }*/
 
     }
 
