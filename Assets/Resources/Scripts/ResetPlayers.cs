@@ -11,7 +11,7 @@ public class ResetPlayers : MonoBehaviour
 
     public bool resetGame;
     public Vector3 localStartPos;
-    public GameObject xrOriginCamera;
+    public GameObject xrOrigin;
 
 
     // Start is called before the first frame update
@@ -43,7 +43,7 @@ public class ResetPlayers : MonoBehaviour
             resetGame = true;
             foreach (GameObject player in gos)
             {
-                //player.GetComponent<NetworkPlayerScript>().isReady = false;
+                player.GetComponent<NetworkPlayerScript>().isReady = false;
             }
         }
 
@@ -54,7 +54,8 @@ public class ResetPlayers : MonoBehaviour
 
     private void resetXRrig()
     {
-        xrOriginCamera.transform.position = localStartPos;
+        xrOrigin.transform.position = localStartPos;
+        Debug.Log("´Reset XRRig.");
     }
 
 
