@@ -334,8 +334,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4608317341680833070}
   - component: {fileID: 4283218040125478297}
-  - component: {fileID: 2716363182786464323}
-  - component: {fileID: 3368286456811358947}
   - component: {fileID: 3971785583371826415}
   m_Layer: 0
   m_Name: Network Player
@@ -384,8 +382,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 2716363182786464323}
-  - {fileID: 3368286456811358947}
   - {fileID: 3971785583371826415}
   - {fileID: 7201902763189170475}
   - {fileID: 420785988766634803}
@@ -394,48 +390,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2716363182786464323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280348768580596657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49ce0aefd7032154facfd00e4ff50f7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  head: {fileID: 7822196140822406475}
-  body: {fileID: 6454947494645752192}
-  leftHand: {fileID: 7063144677609186270}
-  rightHand: {fileID: 3074420046716760912}
-  startPosition: {x: 0, y: 0, z: 0}
-  isLocal: 0
-  isReady: 0
-  startReference: {fileID: 845526307838459384, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
---- !u!114 &3368286456811358947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280348768580596657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f553556d44ede0648bde08a5ee882c23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startGame: 0
-  gameEnded: 0
-  positionRestarted: 0
-  restartReference: {fileID: -3280383718153123070, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  startReference: {fileID: 845526307838459384, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  finishPlate: {fileID: 0}
-  startPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &3971785583371826415
 MonoBehaviour:
   m_ObjectHideFlags: 0
