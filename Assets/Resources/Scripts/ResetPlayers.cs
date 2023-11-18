@@ -66,6 +66,7 @@ public class ResetPlayers : MonoBehaviour
         if (gameEnded)
         {
             gameStarted = false;
+            gameEnded = false;
 
             // find all players and set them to lost if they lost
             playerGameObjects = GameObject.FindGameObjectsWithTag("Player"); foreach (GameObject player in playerGameObjects)

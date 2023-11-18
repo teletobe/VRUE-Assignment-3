@@ -407,9 +407,8 @@ MonoBehaviour:
   leftHand: {fileID: 2243193235966676343}
   rightHand: {fileID: 7899618075558715963}
   startPosition: {x: 0, y: 0, z: 0}
+  status: 0
   isLocal: 0
-  isReady: 1
-  hasWon: 0
   startReference: {fileID: 845526307838459384, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &8428039311497602127
