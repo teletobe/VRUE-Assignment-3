@@ -24,6 +24,7 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     public Vector3 startPosition;
     public bool isLocal;
     public bool isReady;
+    public bool hasWon;
     List<Renderer> rendererList = new List<Renderer>();
 
     Color originalColor = new Color(0.0f, 0.8f, 1.0f, 0.7f);
@@ -69,18 +70,18 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     // Update is called once per frame
     void Update()
     {
-        if (isReady)
+        foreach (Renderer r in rendererList)
         {
-            foreach(Renderer r in rendererList)
+            if (isReady)
             {
                 r.material.SetColor("_Color", Color.yellow);
-            }
-        }
-        else
-        {
-            foreach (Renderer r in rendererList)
+            } else if (hasWon)
+            {
+                r.material.SetColor("_Color", Color.green);
+            } else
             {
                 r.material.SetColor("_Color", originalColor);
+
             }
         }
 
@@ -130,10 +131,12 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         if (stream.IsReading)
         {
             isReady = (bool)stream.ReceiveNext();
+            hasWon = (bool)stream.ReceiveNext();
         }
         else if (stream.IsWriting)
         {
             stream.SendNext(isReady);
+            stream.SendNext(hasWon);
         }
     }
 
