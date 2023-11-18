@@ -334,7 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4608317341680833070}
   - component: {fileID: 4283218040125478297}
-  - component: {fileID: 3971785583371826415}
+  - component: {fileID: 4819601587135764556}
   m_Layer: 0
   m_Name: Network Player
   m_TagString: Player
@@ -382,7 +382,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 3971785583371826415}
+  - {fileID: 4819601587135764556}
   - {fileID: 7201902763189170475}
   - {fileID: 420785988766634803}
   - {fileID: 979719777543572449}
@@ -390,7 +390,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3971785583371826415
+--- !u!114 &4819601587135764556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -399,13 +399,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8280348768580596657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6a1e62cca17cb48ae75399410c2b0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 49ce0aefd7032154facfd00e4ff50f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
-  z: 0
-  value: 0
+  head: {fileID: 7822196140822406475}
+  body: {fileID: 6454947494645752192}
+  leftHand: {fileID: 7063144677609186270}
+  rightHand: {fileID: 3074420046716760912}
+  startPosition: {x: 0, y: 0, z: 0}
+  isLocal: 0
+  isReady: 0
+  startReference: {fileID: 845526307838459384, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &8428039311497602127
 GameObject:
   m_ObjectHideFlags: 0

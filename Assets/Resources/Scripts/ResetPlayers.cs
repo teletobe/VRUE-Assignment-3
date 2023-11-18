@@ -43,7 +43,7 @@ public class ResetPlayers : MonoBehaviour
             resetGame = true;
             foreach (GameObject player in gos)
             {
-                player.GetComponent<NetworkPlayerScript>().isReady = false;
+                //player.GetComponent<NetworkPlayerScript>().isReady = false;
             }
         }
 

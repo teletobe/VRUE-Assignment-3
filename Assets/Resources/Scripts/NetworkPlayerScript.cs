@@ -28,11 +28,9 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
 
     public InputActionReference startReference = null;
 
-
-
     private void Awake()
     {
-       // startReference.action.started += StartGame;
+       startReference.action.started += StartGame;
     }
 
 
@@ -91,14 +89,15 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         }
     }
 
-    /*
+    
     public void StartGame(InputAction.CallbackContext ctx)
     {
+        /*
         if (photonView.IsMine)
         {
             isReady = true;
-        }
-    }*/
+        }*/
+    }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
