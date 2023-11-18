@@ -11,7 +11,6 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
 {
     // clone
     public GameObject head;
-
     public GameObject body;
     public GameObject leftHand;
     public GameObject rightHand;
@@ -25,7 +24,8 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     public Vector3 startPosition;
     public bool isLocal;
     public bool isReady;
-    private Renderer headRenderer;
+    List<Renderer> rendererList = new List<Renderer>();
+
     Color originalColor = new Color(0.0f, 0.8f, 1.0f, 0.7f);
 
     public InputActionReference startReference = null;
@@ -45,12 +45,15 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         xrCamera = GameObject.Find("XR Origin/Camera Offset/Main Camera");
         xrLeftHand = GameObject.Find("XR Origin/Camera Offset/Left Controller");
         xrRightHand = GameObject.Find("XR Origin/Camera Offset/Right Controller");
+
+        // get the Renderer components
+        rendererList.Add(head.GetComponentInChildren<Renderer>());
+        rendererList.Add(body.GetComponentInChildren<Renderer>());
+
         isReady = false;
 
         startPosition = transform.position; // should work like this
 
-        // Get the Renderer component 
-        headRenderer = head.GetComponentInChildren<Renderer>();
         /*
         if (photonView.IsMine)
         {
@@ -68,11 +71,17 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     {
         if (isReady)
         {
-            headRenderer.material.SetColor("_Color", Color.yellow);
+            foreach(Renderer r in rendererList)
+            {
+                r.material.SetColor("_Color", Color.yellow);
+            }
         }
         else
         {
-            headRenderer.material.SetColor("_Color", originalColor);
+            foreach (Renderer r in rendererList)
+            {
+                r.material.SetColor("_Color", originalColor);
+            }
         }
 
         // synchronize xr objects to clones
