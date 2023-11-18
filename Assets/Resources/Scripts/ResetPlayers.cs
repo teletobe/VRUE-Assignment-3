@@ -48,7 +48,9 @@ public class ResetPlayers : MonoBehaviour
                     player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.hasWon;
                     gameEnded = true;
                 }
+                
             }
+            
 
         }
 
@@ -59,9 +61,22 @@ public class ResetPlayers : MonoBehaviour
             gameEnded = false;
         }
 
+
+
         if (gameEnded)
         {
             gameStarted = false;
+
+            // find all players and set them to lost if they lost
+            playerGameObjects = GameObject.FindGameObjectsWithTag("Player"); foreach (GameObject player in playerGameObjects)
+            {
+                GameObject head = player.transform.GetChild(0).gameObject;
+
+                if (head.transform.position.z < 30 && !((player.GetComponent<NetworkPlayerScript>().status) == PlayerStatus.hasWon))
+                {
+                    player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.hasLost;
+                }
+            }
         }
     }
 

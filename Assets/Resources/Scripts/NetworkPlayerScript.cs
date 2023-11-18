@@ -11,7 +11,8 @@ public enum PlayerStatus
 {
     isWaiting,
     isReady,
-    hasWon
+    hasWon,
+    hasLost
 }
 
 public class NetworkPlayerScript : MonoBehaviour, IPunObservable
@@ -86,6 +87,9 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
             {
                 case PlayerStatus.isReady:
                     r.material.SetColor("_Color", Color.yellow);
+                    break;
+                case PlayerStatus.hasLost:
+                    r.material.SetColor("_Color", Color.red);
                     break;
                 case PlayerStatus.hasWon:
                     r.material.SetColor("_Color", Color.green);
