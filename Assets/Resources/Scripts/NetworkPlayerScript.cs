@@ -118,8 +118,11 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     
     public void StartGame(InputAction.CallbackContext ctx)
     {
-        Debug.Log("trigger");
-        isReady = true;
+        if (photonView.IsMine)
+        {
+            Debug.Log("trigger");
+            isReady = true;
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
