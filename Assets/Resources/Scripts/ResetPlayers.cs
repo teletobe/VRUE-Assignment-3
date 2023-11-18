@@ -11,8 +11,8 @@ public class ResetPlayers : MonoBehaviour
     public Vector3 localStartPos;
     public GameObject xrOrigin;
 
-    private bool gameStarted;
-    private bool gameEnded;
+    private bool gameStarted = false;
+    private bool gameEnded = false;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +49,7 @@ public class ResetPlayers : MonoBehaviour
         }
 
         // if all players isReady then reset position
-        if (!bools.Contains(false)){
+        if (!bools.Contains(false) && !gameStarted){
             resetXRrig();
             gameStarted = true;
             gameEnded = false;
