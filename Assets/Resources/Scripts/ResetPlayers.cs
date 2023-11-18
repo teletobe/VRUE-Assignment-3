@@ -62,14 +62,6 @@ public class ResetPlayers : MonoBehaviour
         if (gameEnded)
         {
             gameStarted = false;
-            foreach (GameObject player in playerGameObjects)
-            {
-                if (player.GetComponent<NetworkPlayerScript>().status != PlayerStatus.hasWon && player.GetComponent<NetworkPlayerScript>().status != PlayerStatus.isReady)
-                {
-                    player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.hasLost;
-
-                }
-            }
         }
     }
 

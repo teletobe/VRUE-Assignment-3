@@ -613,7 +613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardDirection: {fileID: 1167441642}
-  speed: 100
+  speed: 1000
   handSpeedThreshold: 1
   smoothingFactor: 0.2
   xrOrigin: {fileID: 131329519}
@@ -6188,7 +6188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8362f161597c74429ed60e9977e320d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetGame: 0
   localStartPos: {x: 0, y: 0, z: 0}
   xrOrigin: {fileID: 131329519}
 --- !u!4 &1069256173
