@@ -10,10 +10,11 @@ using UnityEngine.InputSystem;
 public class NetworkPlayerScript : MonoBehaviour, IPunObservable
 {
     // clone
-    public Transform head;
-    public Transform body;
-    public Transform leftHand;
-    public Transform rightHand;
+    public GameObject head;
+
+    public GameObject body;
+    public GameObject leftHand;
+    public GameObject rightHand;
     private PhotonView photonView;
 
     // original xr gameobjct
@@ -21,10 +22,11 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     private GameObject xrLeftHand;
     private GameObject xrRightHand;
 
-
     public Vector3 startPosition;
     public bool isLocal;
     public bool isReady;
+    private Renderer headRenderer;
+    Color originalColor = new Color(0.0f, 0.8f, 1.0f, 0.7f);
 
     public InputActionReference startReference = null;
 
@@ -46,6 +48,9 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         isReady = false;
 
         startPosition = transform.position; // should work like this
+
+        // Get the Renderer component 
+        headRenderer = head.GetComponentInChildren<Renderer>();
         /*
         if (photonView.IsMine)
         {
@@ -61,6 +66,15 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     // Update is called once per frame
     void Update()
     {
+        if (isReady)
+        {
+            headRenderer.material.SetColor("_Color", Color.yellow);
+        }
+        else
+        {
+            headRenderer.material.SetColor("_Color", originalColor);
+        }
+
         // synchronize xr objects to clones
         if (photonView.IsMine)
         {
@@ -78,27 +92,25 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         }
     }
 
-    void MapXRPosition(Transform target, GameObject gameObject)
+    void MapXRPosition(GameObject target, GameObject gameObject)
     {
-        target.position = gameObject.transform.position;
+        target.transform.position = gameObject.transform.position;
 
         if (target != body)
         {
-            target.rotation = gameObject.transform.rotation;
+            target.transform.rotation = gameObject.transform.rotation;
         }
         else
         {
-            target.rotation = Quaternion.identity;
+            target.transform.rotation = Quaternion.identity;
         }
     }
 
     
     public void StartGame(InputAction.CallbackContext ctx)
     {
-        if (photonView.IsMine)
-        {
-            isReady = true;
-        }
+        Debug.Log("trigger");
+        isReady = true;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
