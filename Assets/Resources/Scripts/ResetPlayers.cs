@@ -40,7 +40,7 @@ public class ResetPlayers : MonoBehaviour
             }
 
             // win condition
-            if (!gameEnded)
+            if (!gameEnded && gameStarted)
             {
                 GameObject head = player.transform.GetChild(0).gameObject;
                 if (head.transform.position.z >= 30)
@@ -64,7 +64,7 @@ public class ResetPlayers : MonoBehaviour
             gameStarted = false;
             foreach (GameObject player in playerGameObjects)
             {
-                if (player.GetComponent<NetworkPlayerScript>().status != PlayerStatus.hasWon)
+                if (player.GetComponent<NetworkPlayerScript>().status != PlayerStatus.hasWon && player.GetComponent<NetworkPlayerScript>().status != PlayerStatus.isReady)
                 {
                     player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.hasLost;
 
