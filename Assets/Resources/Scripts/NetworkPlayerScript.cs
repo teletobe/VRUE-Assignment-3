@@ -7,6 +7,13 @@ using Unity.XR.CoreUtils;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
 
+public enum PlayerStatus
+{
+    isWaiting,
+    isReady,
+    hasWon
+}
+
 public class NetworkPlayerScript : MonoBehaviour, IPunObservable
 {
     // clone
@@ -22,9 +29,12 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     private GameObject xrRightHand;
 
     public Vector3 startPosition;
+    public PlayerStatus status;
+
     public bool isLocal;
+    /*
     public bool isReady;
-    public bool hasWon;
+    public bool hasWon;*/
     List<Renderer> rendererList = new List<Renderer>();
 
     Color originalColor = new Color(0.0f, 0.8f, 1.0f, 0.7f);
@@ -51,7 +61,7 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         rendererList.Add(head.GetComponentInChildren<Renderer>());
         rendererList.Add(body.GetComponentInChildren<Renderer>());
 
-        isReady = false;
+        status = PlayerStatus.isWaiting;
 
         startPosition = transform.position; // should work like this
 
@@ -72,16 +82,17 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     {
         foreach (Renderer r in rendererList)
         {
-            if (isReady)
+            switch (status)
             {
-                r.material.SetColor("_Color", Color.yellow);
-            } else if (hasWon)
-            {
-                r.material.SetColor("_Color", Color.green);
-            } else
-            {
-                r.material.SetColor("_Color", originalColor);
-
+                case PlayerStatus.isReady:
+                    r.material.SetColor("_Color", Color.yellow);
+                    break;
+                case PlayerStatus.hasWon:
+                    r.material.SetColor("_Color", Color.green);
+                    break;
+                default:
+                    r.material.SetColor("_Color", originalColor);
+                    break;
             }
         }
 
@@ -122,7 +133,7 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
         if (photonView.IsMine)
         {
             Debug.Log("trigger");
-            isReady = true;
+            status = PlayerStatus.isReady;
         }
     }
 
@@ -130,13 +141,11 @@ public class NetworkPlayerScript : MonoBehaviour, IPunObservable
     {
         if (stream.IsReading)
         {
-            isReady = (bool)stream.ReceiveNext();
-            hasWon = (bool)stream.ReceiveNext();
+            status = (PlayerStatus)stream.ReceiveNext();
         }
         else if (stream.IsWriting)
         {
-            stream.SendNext(isReady);
-            stream.SendNext(hasWon);
+            stream.SendNext(status);
         }
     }
 

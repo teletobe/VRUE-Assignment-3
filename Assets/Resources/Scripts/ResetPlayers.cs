@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.InputSystem;
 using Photon.Pun;
-
+using System.Linq;
 
 public class ResetPlayers : MonoBehaviour
 {
@@ -28,10 +28,10 @@ public class ResetPlayers : MonoBehaviour
         playerGameObjects = GameObject.FindGameObjectsWithTag("Player");
 
         //check all network players if isReady is true
-        List<bool> bools = new List<bool>();
+        List<PlayerStatus> statusList = new List<PlayerStatus>();
         foreach (GameObject player in playerGameObjects)
         {
-            bools.Add(player.GetComponent<NetworkPlayerScript>().isReady);
+            statusList.Add(player.GetComponent<NetworkPlayerScript>().status);
 
             // get start position
             if (player.GetComponent<NetworkPlayerScript>().isLocal)
@@ -43,13 +43,13 @@ public class ResetPlayers : MonoBehaviour
             GameObject head = player.transform.GetChild(0).gameObject;
             if (head.transform.position.z >= 30)
             {
-                player.GetComponent<NetworkPlayerScript>().hasWon = true;
+                player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.hasWon;
             }
 
         }
 
         // if all players isReady then reset position
-        if (!bools.Contains(false) && !gameStarted){
+        if (statusList.All(x => x == PlayerStatus.isReady) && !gameStarted){
             resetXRrig();
             gameStarted = true;
             gameEnded = false;
@@ -60,7 +60,7 @@ public class ResetPlayers : MonoBehaviour
             gameStarted = false;
             foreach (GameObject player in playerGameObjects)
             {
-                player.GetComponent<NetworkPlayerScript>().isReady = false;
+                player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.isReady;
             }
         }
     }
