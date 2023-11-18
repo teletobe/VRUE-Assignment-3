@@ -40,10 +40,14 @@ public class ResetPlayers : MonoBehaviour
             }
 
             // win condition
-            GameObject head = player.transform.GetChild(0).gameObject;
-            if (head.transform.position.z >= 30)
+            if (!gameEnded)
             {
-                player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.hasWon;
+                GameObject head = player.transform.GetChild(0).gameObject;
+                if (head.transform.position.z >= 30)
+                {
+                    player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.hasWon;
+                    gameEnded = true;
+                }
             }
 
         }
@@ -60,7 +64,11 @@ public class ResetPlayers : MonoBehaviour
             gameStarted = false;
             foreach (GameObject player in playerGameObjects)
             {
-                player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.isReady;
+                if (player.GetComponent<NetworkPlayerScript>().status != PlayerStatus.hasWon)
+                {
+                    player.GetComponent<NetworkPlayerScript>().status = PlayerStatus.hasLost;
+
+                }
             }
         }
     }
@@ -70,6 +78,7 @@ public class ResetPlayers : MonoBehaviour
         xrOrigin.transform.position = localStartPos;
         Debug.Log("Reset XRRig.");
     }
+
 
 
 }
