@@ -37,6 +37,14 @@ public class PlayerMovement : MonoBehaviour
     // Bounce-back parameters
     public float bounceForce = 1f;
 
+    // parameters to reduce speed for a duration
+    private bool isMovementDecayed = false;
+    private float originalSpeed;
+    private float decayStartTime;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         positionPreviousPlayer = xrCamera.transform.position;
         positionPreviousLeftHand = xrLeftHand.transform.position;
         positionPreviousRightHand = xrRightHand.transform.position;
+
+        originalSpeed = speed;  // Store the original speed
     }
 
     // Update is called once per frame
@@ -65,8 +75,20 @@ public class PlayerMovement : MonoBehaviour
         // If colliding with an obstacle, apply a bounce-back force
         if (isCollidingWithObstacle)
         {
+            if (!isMovementDecayed)
+            {
+                DecayMovement();
+                //Debug.Log("Decaying NOW!" + speed);
+            }
             BounceBack();
             return;
+        }
+
+
+        // If collision is not detected, reset movement decay flag after cooldown
+        if (isMovementDecayed && (Time.time - decayStartTime) >= 7f)
+        {
+            isMovementDecayed = false;
         }
 
         // get forward direction
@@ -111,6 +133,38 @@ public class PlayerMovement : MonoBehaviour
         Vector3 bounceForceVector = bounceDirection * bounceForce;
         xrOrigin.transform.Translate(bounceForceVector * Time.deltaTime, Space.World);
     }
+
+    // Function to decay movement
+    private void DecayMovement()
+    {
+        isMovementDecayed = true;
+        speed *= 0.2f;  // Halve the speed instantly
+
+        // Store the start time of the decay
+        decayStartTime = Time.time;
+        StartCoroutine(GradualIncreaseToOriginalSpeed());
+    }
+
+    // Coroutine to gradually increase speed back to the original value over five seconds
+    private IEnumerator GradualIncreaseToOriginalSpeed()
+    {
+        float elapsedTime = 0f;
+        float startSpeed = speed;  // Store the starting speed
+
+        while (elapsedTime < 7f)  // Five-second duration
+        {
+            elapsedTime += Time.deltaTime;
+
+            // Linearly interpolate speed between the starting speed and the original speed
+            speed = Mathf.Lerp(startSpeed, originalSpeed, elapsedTime / 7f);
+
+            yield return null;
+        }
+
+        // Ensure speed is set to the original value when the coroutine is done
+        speed = originalSpeed;
+    }
+
 
 
 }

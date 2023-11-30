@@ -6,7 +6,6 @@ using UnityEngine;
 public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 {
     private GameObject spawnedPlayerPrefab;
-    private GameObject spawnedTrackPrefab;
 
     public GameObject xrOrigin;
     private GameLogic gameLogic;
@@ -20,7 +19,6 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 
         // track
         Vector3 distance = new Vector3((PhotonNetwork.PlayerList.Length -1) * 10, 0, 0);
-        spawnedTrackPrefab = PhotonNetwork.Instantiate("Prefabs/Track", distance, Quaternion.identity);
 
         xrOrigin.transform.position = distance;
         // player
@@ -32,7 +30,5 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
     {
         base.OnLeftRoom();
         PhotonNetwork.Destroy(spawnedPlayerPrefab);
-        PhotonNetwork.Destroy(spawnedTrackPrefab);
-
     }
 }
